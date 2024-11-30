@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assests/colors';
 import Card from '../components/Card';
+import HomeTab from '../components/HomeTab';
 
 const HomeScreen = () => {
   const data = [
@@ -37,6 +38,18 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Time Table</Text>
+      </View>
+      <View>
+        <ScrollView
+          horizontal
+          contentContainerStyle={{
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            gap: 10,
+          }}>
+          <HomeTab title="Monday" />
+          <HomeTab title="Tuesday" />
+        </ScrollView>
       </View>
       <FlatList
         data={data}

@@ -8,6 +8,8 @@ import {
   Alert,
 } from 'react-native';
 import api from '../services/axios-interceptor'; // Import your Axios instance
+import PrimaryButton from '../components/PrimaryButton';
+import { colors } from '../assests/colors';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -81,14 +83,8 @@ const LoginScreen = ({navigation}) => {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      <TouchableOpacity
-        style={[styles.button, loading && {backgroundColor: '#ddd'}]}
-        onPress={handleLogin}
-        disabled={loading}>
-        <Text style={styles.buttonText}>
-          {loading ? 'Logging in...' : 'Login'}
-        </Text>
-      </TouchableOpacity>
+   
+      <PrimaryButton  title='Login' onPress={handleLogin} loading={loading} />
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
@@ -127,7 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   link: {
-    color: '#ffa500',
+    color: colors.primary,
     textAlign: 'center',
     marginTop: 20,
   },

@@ -6,11 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import PrimaryButton from '../components/PrimaryButton';
+import { colors } from '../assests/colors';
 
 const SignupScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Signup</Text>
+      <Text style={styles.title}>Register</Text>
       <TextInput style={styles.input} placeholder="Name" />
       <TextInput style={styles.input} placeholder="Email" />
       <TextInput style={styles.input} placeholder="Password" secureTextEntry />
@@ -19,11 +21,10 @@ const SignupScreen = ({navigation}) => {
         placeholder="Confirm Password"
         secureTextEntry
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
+      <PrimaryButton
+        onPress={() => navigation.navigate('Home')}
+        title="Signup"
+      />
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.link}>Already have an account? Login</Text>
       </TouchableOpacity>
@@ -51,14 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: '#ffa500',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  buttonText: {color: '#fff', fontWeight: 'bold'},
-  link: {color: '#ffa500', textAlign: 'center', marginTop: 20},
+  link: {color: colors.primary, textAlign: 'center', marginTop: 20},
 });
 
 export default SignupScreen;

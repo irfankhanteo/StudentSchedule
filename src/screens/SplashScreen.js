@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import { colors } from '../assests/colors';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
@@ -21,10 +22,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffa500',
+    backgroundColor: colors.primary,
   },
   logo: {width: 100, height: 100},
-  title: {fontSize: 24, fontWeight: 'bold', color: '#fff', marginTop: 20},
+  title: {fontSize: 24, fontWeight: 'bold', color: colors.white, marginTop: 20},
 });
 
 export default SplashScreen;
