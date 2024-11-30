@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../assests/colors';
 import Card from '../components/Card';
 import HomeTab from '../components/HomeTab';
 
 const HomeScreen = () => {
+  const [selectedDay, setSelectedDay] = useState('Monday');
   const data = [
     {
       id: '1',
@@ -42,13 +43,19 @@ const HomeScreen = () => {
       <View>
         <ScrollView
           horizontal
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             paddingHorizontal: 20,
             paddingVertical: 10,
             gap: 10,
           }}>
-          <HomeTab title="Monday" />
-          <HomeTab title="Tuesday" />
+            {
+                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map((day, index) => (
+                    <HomeTab selectedDay={selectedDay} onPress={()=>{
+                        setSelectedDay(day);
+                    }} key={index} title={day} />
+                ))
+            }
         </ScrollView>
       </View>
       <FlatList
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: colors.white},
   header: {backgroundColor: colors.primary, padding: 15, alignItems: 'center'},
   headerTitle: {fontSize: 20, fontWeight: 'bold', color: colors.white},
-  list: {paddingHorizontal: 10, paddingBottom: 80},
+  list: {paddingHorizontal: 20, paddingBottom: 80},
 });
 
 export default HomeScreen;

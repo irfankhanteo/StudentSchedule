@@ -2,13 +2,27 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { colors } from "../assests/colors";
 
 export default HomeTab = ({
-    title='Home',
+  title = 'Home',
+  onPress = () => {},
+  selectedDay,
 }) => {
-    return (
-      <TouchableOpacity style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
-      </TouchableOpacity>
-    );
+    const isSelected = selectedDay === title;
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        ...styles.container,
+        backgroundColor: isSelected ? colors.primary : colors.cF2F2F2,
+      }}>
+      <Text
+        style={{
+          ...styles.title,
+          color: isSelected ? colors.cF2F2F2 : colors.primary,
+        }}>
+        {title}
+      </Text>
+    </TouchableOpacity>
+  );
 };
 const styles = StyleSheet.create({
     container: {
