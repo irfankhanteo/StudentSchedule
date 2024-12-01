@@ -6,11 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
 import api from '../services/axios-interceptor'; // Import your Axios instance
 import PrimaryButton from '../components/PrimaryButton';
-import { colors } from '../assests/colors';
-
+import {colors} from '../assests/colors';
+import Logo from '../images/logo.jpg';
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,18 +23,18 @@ const LoginScreen = ({navigation}) => {
       Alert.alert('Validation Error', 'Email is required');
       return false;
     }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      Alert.alert('Validation Error', 'Invalid email format');
-      return false;
-    }
+    // if (!/\S+@\S+\.\S+/.test(email)) {
+    //   Alert.alert('Validation Error', 'Invalid email format');
+    //   return false;
+    // }
     if (!password.trim()) {
       Alert.alert('Validation Error', 'Password is required');
       return false;
     }
-    if (password.length < 6) {
-      Alert.alert('Validation Error', 'Password must be at least 6 characters');
-      return false;
-    }
+    // if (password.length < 6) {
+    //   Alert.alert('Validation Error', 'Password must be at least 6 characters');
+    //   return false;
+    // }
     return true;
   };
 
@@ -44,22 +45,24 @@ const LoginScreen = ({navigation}) => {
     setLoading(true);
 
     try {
-      const response = await api.post('/auth/login', {
-        email,
-        password,
+      const response = await api.post('Students/Login', {
+        UserName: email,
+        Password: password,
       });
 
-      // Handle successful login
-      console.log('Login Success:', response.data);
       Alert.alert('Success', 'Login successful!');
-      navigation.navigate('Home');
+      navigation.navigate('Dashboard', {data: response.data});
     } catch (error) {
       // Handle API error
       console.error('Login Error:', error.response?.data || error.message);
-      Alert.alert(
-        'Error',
-        error.response?.data?.message || 'Something went wrong',
-      );
+      if (error.response.status === 401) {
+        Alert.alert('Login Error', 'Invalid credentials. Please try again.');
+      } else {
+        Alert.alert(
+          'Error',
+          error.response?.data?.message || 'Something went wrong',
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -67,7 +70,9 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Image source={Logo} style={{width: 200, alignSelf: 'center'}} />
+
+      <Text style={styles.title}>Login with your Username and password</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -83,8 +88,8 @@ const LoginScreen = ({navigation}) => {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-   
-      <PrimaryButton  title='Login' onPress={handleLogin} loading={loading} />
+
+      <PrimaryButton title="Login" onPress={handleLogin} loading={loading} />
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.link}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
@@ -95,7 +100,7 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     padding: 20,
     backgroundColor: '#fff',
   },
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     padding: 10,
     borderRadius: 5,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   button: {
     backgroundColor: '#ffa500',

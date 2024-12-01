@@ -1,20 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { colors } from '../assests/colors';
+import {colors} from '../assests/colors';
 
 export default Card = ({item}) => (
   <View style={styles.card}>
     <View style={styles.cardContent}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.subtitle}>{item.name}</Text>
+      <Text style={styles.title}>{item?.CourseTitle}</Text>
+      <Text style={styles.subtitle}>{item?.TeacherName}</Text>
       <View style={styles.row}>
         <Icon name="location-outline" size={18} color={colors.black} />
-        <Text style={styles.location}>{item.location}</Text>
+        <Text style={styles.location}>{item?.Location}</Text>
       </View>
       <View style={styles.row}>
         <Icon name="time-outline" size={18} color={colors.black} />
-        <Text style={styles.time}>{item.time}</Text>
+        <Text style={styles.time}>{`${item?.FromTime}-${item?.ToTime}`}</Text>
       </View>
     </View>
   </View>

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const api = axios.create({
-  baseURL: 'https://api.example.com', // Replace with your base URL
+  baseURL: 'http://hamiddawod-001-site4.ptempurl.com/api/', // Replace with your base URL
   timeout: 30000, // Timeout after 5 seconds
   headers: {
     'Content-Type': 'application/json',
